@@ -68,12 +68,21 @@ int main(int argc, char *argv[])
     printf("%ld", filelen);
     rewind(input); */
 
-    for (int i = 0; i < 2000; i++)
+    BYTE *data = malloc(sizeof(BYTE) * 2);
+
+    while (fread(data, sizeof(BYTE) * 2, 1, input))
+    {
+        *data = *data * factor;
+        fwrite(data, sizeof(BYTE) * 2, 1, output);
+    }
+
+    /* for (int i = 0; i < 2000; i++)
     {
         WORD sample;
         fread(&sample, sizeof(WORD), 1, input);
         printf("%i", sample);
-    }
+    } */
+
     // Close files
     fclose(input);
     fclose(output);
